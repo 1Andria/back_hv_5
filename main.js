@@ -52,20 +52,14 @@ const { json } = require("stream/consumers");
 
 // 4) Write a random text into a file named text.txt. Then, read this file and count how many vowels are present.
 
-// async function Vowels() {
-//   const text = await fs.readFile("text.txt", "utf-8");
-//   let counter = 0;
-//   for (let i = 0; i < text.length; i++) {
-//     if (
-//       text[i] === "a" ||
-//       text[i] === "e" ||
-//       text[i] === "i" ||
-//       text[i] === "o" ||
-//       text[i] === "u"
-//     ) {
-//       counter++;
-//     }
-//   }
-//   console.log(counter);
-// }
-// Vowels();
+async function Vowels() {
+  const text = await fs.readFile("text.txt", "utf-8");
+  let counter = 0;
+  for (let i = 0; i < text.length; i++) {
+    if ("aeiou".includes(text[i])) {
+      counter++;
+    }
+  }
+  console.log(counter);
+}
+Vowels();
