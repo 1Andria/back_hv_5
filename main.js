@@ -32,34 +32,33 @@ const { json } = require("stream/consumers");
 // fetchData();
 // 3) Run the command node main.js Ferrari 2020 red, retrieve the data from process.argv, and build a car object with the properties id, carModel, carColor, and carReleaseDate.(id should be unique) Append this object to cars.json. Each time you run this command, a new object should be added to cars.json, so if you run it five times, you should have five objects in the file.
 
-// const [, , car, year, color] = process.argv;
+const [, , car, year, color] = process.argv;
+async function Cars() {
+  const data = await fs.readFile("cars.json", "utf-8");
+  const cars = JSON.parse(data);
 
-// async function Cars() {
-//   const data = await fs.readFile("cars.json", "utf-8");
-//   const cars = JSON.parse(data);
-//   let counter = 0;
-//   const newCar = {
-//     id: counter,
-//     carModel: car,
-//     carColor: color,
-//     carReleaseData: year,
-//   };
-//   counter++;
-//   cars.push(newCar);
-//   await fs.writeFile("cars.json", JSON.stringify(cars));
-// }
-// Cars();
+  const newCar = {
+    carModel: car,
+    carColor: color,
+    carReleaseData: year,
+    id: cars.length + 1,
+  };
+  cars.push(newCar);
+
+  await fs.writeFile("cars.json", JSON.stringify(cars));
+}
+Cars();
 
 // 4) Write a random text into a file named text.txt. Then, read this file and count how many vowels are present.
 
-async function Vowels() {
-  const text = await fs.readFile("text.txt", "utf-8");
-  let counter = 0;
-  for (let i = 0; i < text.length; i++) {
-    if ("aeiou".includes(text[i])) {
-      counter++;
-    }
-  }
-  console.log(counter);
-}
-Vowels();
+// async function Vowels() {
+//   const text = await fs.readFile("text.txt", "utf-8");
+//   let counter = 0;
+//   for (let i = 0; i < text.length; i++) {
+//     if ("aeiou".includes(text[i])) {
+//       counter++;
+//     }
+//   }
+//   console.log(counter);
+// }
+// Vowels();
